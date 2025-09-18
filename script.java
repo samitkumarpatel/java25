@@ -18,7 +18,8 @@ void fetchData() {
             .uri(URI.create("https://jsonplaceholder.typicode.com/users/1"))
             .build();
 
-    IO.println("JOSN Placeholder response::");
+    IO.println("JOSN Placeholder async response::");
+
     HttpClient.newHttpClient().sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(response -> response.body())
             .thenAccept(System.out::println)
