@@ -1,20 +1,9 @@
-import java.sql.Date;
 import module java.net.http;
 import com.fasterxml.jackson.databind.*;
 
 void main() {
-    IO.println("Hello World!");
+    IO.println("Script with JAVA!");
 
-    var fruits = List.of("apple", "orange", "banana", "kiwi");
-    fruits.stream().map(String::toUpperCase).forEach(IO::println);
-
-    var currentDate = Date.valueOf(LocalDate.now());
-    IO.println("Current Date :: %s".formatted(currentDate));
-
-    fetchData();
-}
-
-void fetchData() {
     var request = HttpRequest.newBuilder()
             .uri(URI.create("https://jsonplaceholder.typicode.com/users/1"))
             .build();
@@ -28,7 +17,6 @@ void fetchData() {
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     var user = mapper.readValue(json, User.class); // deserialize JSON → record
-                    //use user object what ever you want for 
                     return user;
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -36,4 +24,7 @@ void fetchData() {
             })
             .thenAccept(System.out::println)
             .join();
+
 }
+
+record User(int id, String name, String email) {}
