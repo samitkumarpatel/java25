@@ -8,7 +8,7 @@ void main() {
             .uri(URI.create("https://jsonplaceholder.typicode.com/users/1"))
             .build();
 
-    IO.println("JOSN Placeholder async response::");
+    IO.println("JSON Placeholder sync response::");
 
     try {
         var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
